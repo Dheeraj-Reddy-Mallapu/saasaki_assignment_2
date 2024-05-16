@@ -1,0 +1,21 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "saasaki-assignment-2",
+          "appId": "1:16567132822:android:b312ac6ed4629601c398b7",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "saasaki-assignment-2",
+          "configurations": {
+            "android": "1:16567132822:android:b312ac6ed4629601c398b7"
+          }
+        }
+      }
+    }
+  }
+}

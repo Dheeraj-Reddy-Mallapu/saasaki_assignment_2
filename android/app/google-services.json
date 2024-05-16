@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "16567132822",
+    "project_id": "saasaki-assignment-2",
+    "storage_bucket": "saasaki-assignment-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16567132822:android:b312ac6ed4629601c398b7",
+        "android_client_info": {
+          "package_name": "com.example.saasaki_assignment_2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAobjxT3aJyeATxfiAaX371_BM1UkFemxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
