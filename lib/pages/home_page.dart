@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:saasaki_assignment_2/firestore/crud.dart';
 import 'package:saasaki_assignment_2/models/task_model.dart';
+import 'package:saasaki_assignment_2/notifications/local_notifications.dart';
 import 'package:saasaki_assignment_2/pages/create_task_page.dart';
 import 'package:saasaki_assignment_2/riverpod/auth.dart';
 import 'package:saasaki_assignment_2/riverpod/tasks_data.dart';
@@ -16,10 +17,17 @@ class HomePage extends ConsumerStatefulWidget {
 
 class _HomePageState extends ConsumerState<HomePage> {
   var firestoreOperations = FirestoreOperations();
+  var notifHelper = NotificationHelper();
+
+  init() async {
+    firestoreOperations.startTasksStream(ref);
+
+    await notifHelper.initializeNotifications();
+  }
 
   @override
   void initState() {
-    firestoreOperations.startTasksStream(ref);
+    init();
     super.initState();
   }
 
@@ -27,6 +35,8 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final auth = ref.read(authProvider);
     final tasksMap = ref.watch(tasksProvider);
+
+    notifHelper.turnOnNotifs(tasksMap);
 
     return Scaffold(
       appBar: AppBar(

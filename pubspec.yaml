@@ -15,6 +15,8 @@ dependencies:
   cloud_firestore:
   flutter_riverpod:
   email_validator:
+  awesome_notifications:
+  awesome_notifications_core:
 
 dev_dependencies:
   flutter_test:

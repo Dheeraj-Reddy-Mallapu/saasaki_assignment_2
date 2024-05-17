@@ -244,33 +244,35 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
           if (_formKey.currentState!.validate()) {
             if (deadline != null) {
               if (widget.task == null) {
-                await widget.firestoreOperations.addTask(
-                  Task(
-                    title: titleC.text,
-                    description: descriptionC.text,
-                    deadline: deadline!,
-                    exptectedTime: exptectedTime,
-                    priority: selectedPriority,
-                    status: selectedStatus,
-                    createdAt: DateTime.now(),
-                  ),
-                );
+                await widget.firestoreOperations
+                    .addTask(
+                      Task(
+                        title: titleC.text,
+                        description: descriptionC.text,
+                        deadline: deadline!,
+                        exptectedTime: exptectedTime,
+                        priority: selectedPriority,
+                        status: selectedStatus,
+                        createdAt: DateTime.now(),
+                      ),
+                    )
+                    .then((value) => Navigator.of(context).pop());
               } else {
-                await widget.firestoreOperations.updateTask(
-                  Task(
-                    title: titleC.text,
-                    description: descriptionC.text,
-                    deadline: deadline!,
-                    exptectedTime: exptectedTime,
-                    priority: selectedPriority,
-                    status: selectedStatus,
-                    createdAt: DateTime.now(),
-                  ),
-                  widget.taskId!,
-                );
+                await widget.firestoreOperations
+                    .updateTask(
+                      Task(
+                        title: titleC.text,
+                        description: descriptionC.text,
+                        deadline: deadline!,
+                        exptectedTime: exptectedTime,
+                        priority: selectedPriority,
+                        status: selectedStatus,
+                        createdAt: DateTime.now(),
+                      ),
+                      widget.taskId!,
+                    )
+                    .then((value) => Navigator.of(context).pop());
               }
-
-              Navigator.of(context).pop();
             } else {
               showSnackBar(message: 'Pick a deadline');
             }

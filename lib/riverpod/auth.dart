@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:saasaki_assignment_2/notifications/local_notifications.dart';
 import 'package:saasaki_assignment_2/widgets/my_snackbar.dart';
 
 final authProvider = ChangeNotifierProvider<AuthProvider>((ref) {
@@ -73,6 +74,7 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> logout() async {
     await authInstance.signOut();
+    await NotificationHelper().cancelAllNofifications();
 
     _authStatus = AuthStatus.signedOut;
     notifyListeners();
