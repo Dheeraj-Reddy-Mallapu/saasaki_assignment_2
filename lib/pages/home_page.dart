@@ -20,13 +20,16 @@ class _HomePageState extends ConsumerState<HomePage> {
   var notifHelper = NotificationHelper();
 
   init() async {
+    // This will start stream to fetch tasks from firestore
     firestoreOperations.startTasksStream(ref);
 
+    // This will start the notifications service. We are calling in homepage because the user will be in logged in state
     await notifHelper.initializeNotifications();
   }
 
   @override
   void initState() {
+    // initialising
     init();
     super.initState();
   }
@@ -36,6 +39,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     final auth = ref.read(authProvider);
     final tasksMap = ref.watch(tasksProvider);
 
+// Notifications will be turned on when there is a change in the data
     notifHelper.turnOnNotifs(tasksMap);
 
     return Scaffold(

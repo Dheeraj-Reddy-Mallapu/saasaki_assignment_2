@@ -29,6 +29,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
 
   @override
   void initState() {
+    // We are initializing the task data to respective controllers and variables if we are editing it
     if (widget.task != null) {
       titleC.text = widget.task!.title;
       descriptionC.text = widget.task!.description;
@@ -47,6 +48,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
       appBar: AppBar(
         title: const Text('New Task'),
         actions: [
+          // Deletion of Task
           if (widget.task != null)
             IconButton(
               onPressed: () async => widget.firestoreOperations
@@ -244,6 +246,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
           if (_formKey.currentState!.validate()) {
             if (deadline != null) {
               if (widget.task == null) {
+                // Creation of task
                 await widget.firestoreOperations
                     .addTask(
                       Task(
@@ -258,6 +261,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                     )
                     .then((value) => Navigator.of(context).pop());
               } else {
+                // Updation of the task
                 await widget.firestoreOperations
                     .updateTask(
                       Task(
@@ -283,6 +287,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
     );
   }
 
+  // To achieve background effect
   Widget myContainer({required Widget child}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),

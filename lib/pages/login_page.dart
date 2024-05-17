@@ -17,8 +17,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController rePasswordC = TextEditingController();
 
   final ValueNotifier<bool> showPassword = ValueNotifier<bool>(false);
-  final isNewUserProvider = StateNotifierProvider<IsNewUserNotifier, bool>(
-      (_) => IsNewUserNotifier());
+  final isNewUserProvider = StateNotifierProvider<IsNewUserNotifier, bool>((_) =>
+      IsNewUserNotifier()); // To create dynamic UI that updates when user switches between login and register
 
   final _formKey = GlobalKey<FormState>();
 
@@ -30,6 +30,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final auth = ref.watch(authProvider);
     final isNewUser = ref.watch(isNewUserProvider);
 
+    // This widget creates rounded container as a backround to it's child
     Widget textFieldContainer({required Widget child}) => Padding(
           padding: const EdgeInsets.all(4.0),
           child: Container(
@@ -83,6 +84,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.next,
                             validator: (value) =>
+                                // Popular Email validation package
                                 EmailValidator.validate(value ?? '')
                                     ? null
                                     : ' Please enter a valid email',
@@ -105,6 +107,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   ? TextInputAction.next
                                   : TextInputAction.done,
                               validator: (value) {
+                                // Form validation which shows errors for the user
                                 if (value!.isEmpty || value.length < 6) {
                                   return 'Minimum 6 charaters';
                                 } else {
@@ -211,6 +214,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   }
 }
 
+// To create dynamic UI that updates when user switches between login and register
 class IsNewUserNotifier extends StateNotifier<bool> {
   IsNewUserNotifier() : super(false); // Initialize with the default value
 

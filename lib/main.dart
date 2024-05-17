@@ -24,7 +24,8 @@ class MainApp extends ConsumerWidget {
           brightness: isDark ? Brightness.dark : Brightness.light,
         );
 
-    final auth = ref.watch(authProvider)..checkStatus();
+    final auth = ref.watch(authProvider)
+      ..checkStatus(); // To check whether the user is logged in or not
     bool isLoggedIn = auth.authStatus == AuthStatus.signedIn;
 
     return MaterialApp(

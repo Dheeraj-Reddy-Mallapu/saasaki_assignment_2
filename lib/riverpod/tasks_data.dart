@@ -6,7 +6,7 @@ class TasksDataNotifier extends StateNotifier<Map<String, Task>> {
 
   add(String id, Task task) {
     state[id] = task;
-    state = {...state};
+    state = {...state}; // This is to ensure that the state gets updated
   }
 
   clear() => state = {};
