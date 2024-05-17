@@ -1,17 +1,17 @@
 class Task {
   String title;
-  String? description;
-  DateTime? deadline;
-  int? exptectedDurationInMin;
+  String description;
+  DateTime deadline;
+  DateTime? exptectedTime;
   int priority;
   String status;
   DateTime createdAt;
 
   Task({
     required this.title,
-    this.description,
-    this.deadline,
-    this.exptectedDurationInMin,
+    required this.description,
+    required this.deadline,
+    this.exptectedTime,
     required this.priority,
     required this.status,
     required this.createdAt,
@@ -21,7 +21,7 @@ class Task {
     String? title,
     String? description,
     DateTime? deadline,
-    int? exptectedDurationInMin,
+    DateTime? exptectedTime,
     int? priority,
     String? status,
     DateTime? createdAt,
@@ -30,8 +30,7 @@ class Task {
         title: title ?? this.title,
         description: description ?? this.description,
         deadline: deadline ?? this.deadline,
-        exptectedDurationInMin:
-            exptectedDurationInMin ?? this.exptectedDurationInMin,
+        exptectedTime: exptectedTime ?? this.exptectedTime,
         priority: priority ?? this.priority,
         status: status ?? this.status,
         createdAt: createdAt ?? this.createdAt,
@@ -40,9 +39,10 @@ class Task {
   factory Task.fromMap(Map<String, dynamic> json) => Task(
         title: json["title"],
         description: json["description"],
-        deadline:
-            json["deadline"] == null ? null : DateTime.parse(json["deadline"]),
-        exptectedDurationInMin: json["exptectedDurationInMin"],
+        deadline: DateTime.parse(json["deadline"]),
+        exptectedTime: json["exptectedTime"] == null
+            ? null
+            : DateTime.parse(json["exptectedTime"]),
         priority: json["priority"],
         status: json["status"],
         createdAt: DateTime.parse(json["createdAt"]),
@@ -51,10 +51,14 @@ class Task {
   Map<String, dynamic> toMap() => {
         "title": title,
         "description": description,
-        "deadline": deadline?.toIso8601String(),
-        "exptectedDurationInMin": exptectedDurationInMin,
+        "deadline": deadline.toIso8601String(),
+        "exptectedTime": exptectedTime?.toIso8601String(),
         "priority": priority,
         "status": status,
         "createdAt": createdAt.toIso8601String(),
       };
 }
+
+enum TaskPriority { low, medium, high, critical }
+
+enum TaskStatus { incomplete, ongoing, complete }

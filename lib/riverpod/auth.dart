@@ -32,10 +32,14 @@ class AuthProvider extends ChangeNotifier {
     } on FirebaseAuthException catch (e) {
       _authStatus = AuthStatus.signedOut;
 
-      if (e.code == 'invalid-email' || e.code == 'wrong-password') {
+      if (e.code == 'invalid-email' ||
+          e.code == 'wrong-password' ||
+          e.code == 'invalid-credential') {
         showSnackBar(message: 'Email or Password is invalid');
       } else if (e.code == 'user-not-found') {
         showSnackBar(message: 'User not found, please register');
+      } else {
+        showSnackBar(message: e.code);
       }
     }
 

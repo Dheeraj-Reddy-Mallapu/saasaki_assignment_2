@@ -155,15 +155,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: auth.authStatus != AuthStatus.loading
                               ? ElevatedButton(
-                                  onPressed: () {
+                                  onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
-                                      isNewUser
-                                          ? auth.registerWithEmail(
-                                              email: emailC.text,
-                                              password: passwordC.text)
-                                          : auth.loginInWithEmail(
-                                              email: emailC.text,
-                                              password: passwordC.text);
+                                      if (isNewUser) {
+                                        await auth.registerWithEmail(
+                                            email: emailC.text,
+                                            password: passwordC.text);
+                                      } else {
+                                        await auth.loginInWithEmail(
+                                            email: emailC.text,
+                                            password: passwordC.text);
+                                      }
                                     }
                                   },
                                   child: const Text('Submit'),
